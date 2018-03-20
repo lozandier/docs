@@ -138,7 +138,7 @@ generated that item.
 When you add a declarative event handler **inside** the `<dom-repeat>` template,
 the repeater adds a `model` property to each event sent to the listener. The `model`
 object contains the scope data used to generate the template instance, so the item
-data is `model.item`:
+data is `model.item` or the alias you set for individual items using the `as` property.:
 
 ```html
 <link rel="import" href="polymer/polymer-element.html">
@@ -147,10 +147,10 @@ data is `model.item`:
 <dom-module id="x-custom">
 
   <template>
-    <template is="dom-repeat" id="menu" items="{{menuItems}}">
+    <template is="dom-repeat" id="menu" items="{{menuItems}}" as="menuItem">
         <div>
-          <span>{{item.name}}</span>
-          <span>{{item.ordered}}</span>
+          <span>{{menuItem.name}}</span>
+          <span>{{menuItem.ordered}}</span>
           <button on-click="order">Order</button>
         </div>
     </template>
@@ -177,7 +177,7 @@ data is `model.item`:
       }
 
       order(e) {
-        e.model.set('item.ordered', e.model.item.ordered+1);
+        e.model.set('menuItem.ordered', e.model.menuItem.ordered+1);
       }
     }
 
